@@ -25,6 +25,26 @@
   onMount(() => {
     if (!browser) return;
 
+    // Dynamically load Turnstile script if not already present
+    function loadTurnstileScript(): Promise<void> {
+      return new Promise((resolve) => {
+        // @ts-ignore
+        if (window.turnstile) { resolve(); return; }
+        
+        const existing = document.querySelector('script[src*="turnstile"]');
+        if (existing) {
+          existing.addEventListener('load', () => resolve());
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+        script.async = true;
+        script.onload = () => resolve();
+        document.head.appendChild(script);
+      });
+    }
+
     const checkTurnstile = () => {
       // @ts-ignore
       if (window.turnstile) {
@@ -45,7 +65,7 @@
       }
     };
 
-    checkTurnstile();
+    loadTurnstileScript().then(checkTurnstile);
 
     return () => {
       // @ts-ignore

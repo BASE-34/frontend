@@ -46,7 +46,7 @@
   >
     <!-- Background FX -->
     <div class="scanline-fx opacity-40"></div>
-    <div class="fixed inset-0 bg-[url('/grid.png')] opacity-[0.03] pointer-events-none"></div>
+    <div class="fixed inset-0 opacity-[0.03] pointer-events-none" style="background-image: repeating-linear-gradient(0deg, rgba(164,209,174,0.3) 0px, transparent 1px, transparent 48px), repeating-linear-gradient(90deg, rgba(164,209,174,0.3) 0px, transparent 1px, transparent 48px);"></div>
     
     <!-- Ambient glow -->
     <div class="fixed top-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse,rgba(164,209,174,0.08)_0%,transparent_70%)] pointer-events-none z-0"></div>

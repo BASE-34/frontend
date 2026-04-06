@@ -20,7 +20,7 @@
 
       <!-- Nav -->
       <div class="md:col-span-3">
-        <h4 class="meta-label mb-5">{$t.footer.nav_title}</h4>
+        <h3 class="meta-label mb-5">{$t.footer.nav_title}</h3>
         <nav class="flex flex-col gap-3">
           <a href="/projects" class="text-sm text-on-surface-variant hover:text-primary transition-colors font-bold uppercase tracking-wider">
             {$t.nav.projects}
@@ -39,7 +39,7 @@
 
       <!-- Legal -->
       <div class="md:col-span-2">
-        <h4 class="meta-label mb-5">{$t.footer.legal_title}</h4>
+        <h3 class="meta-label mb-5">{$t.footer.legal_title}</h3>
         <nav class="flex flex-col gap-3">
           <a href="/protocol" class="text-sm text-on-surface-variant hover:text-primary transition-colors font-bold uppercase tracking-wider">
             {$t.footer.statute}
@@ -52,14 +52,14 @@
 
       <!-- Status block -->
       <div class="md:col-span-2">
-        <h4 class="meta-label mb-5">System</h4>
+        <h3 class="meta-label mb-5">System</h3>
         <div class="bg-surface-container-low p-4 flex flex-col gap-4">
           <div class="space-y-3">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
               <span class="text-[9px] font-mono text-primary uppercase tracking-widest">ONLINE</span>
             </div>
-            <div class="text-[9px] font-mono text-on-surface-variant/60 space-y-1">
+            <div class="text-[9px] font-mono text-on-surface-variant/70 space-y-1">
               <div>VER: 1.0.2_BETA</div>
               <div>UPTIME: 99.8%</div>
               <div>NODE: KNU_PRIMARY</div>

@@ -53,7 +53,7 @@
     rel="stylesheet"
   />
   <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add,add_circle,arrow_back,arrow_forward,arrow_forward_ios,article,biotech,build,cable,check_circle,close,electrical_services,expand_more,filter_list_off,groups,history,language,location_on,mail,map,memory,menu,neurology,north_east,precision_manufacturing,refresh,rocket_launch,school,search,search_off,send,thermostat&display=swap"
     rel="stylesheet"
   />
 </svelte:head>

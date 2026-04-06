@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&display=swap');
+/* Font loaded via <link> in +layout.svelte — no duplicate @import needed */
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +16,7 @@
     --surface-container-highest: #333533;
     --on-surface: #e2e3df;
     --on-surface-variant: #c3c8c1;
-    --outline: #8d928c;
+    --outline: #969b96;
     --outline-variant: #434843;
   }
 
@@ -164,10 +164,11 @@
   /* === Page transition entry === */
   .page-enter {
     animation: page-enter 0.35s ease both;
+    will-change: opacity;
   }
   @keyframes page-enter {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
   @keyframes cursor-blink {
     0%, 100% { opacity: 1; }

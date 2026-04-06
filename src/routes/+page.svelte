@@ -130,6 +130,7 @@
           <div
             class="h-full bg-primary"
             style="width:0%"
+            aria-hidden="true"
             use:countUp={{
               target: 100,
               duration: 5000,
@@ -155,7 +156,7 @@
         class="w-full bg-surface-container p-8 flex flex-col items-center gap-6"
       >
         <div
-          class="text-[9px] font-mono text-primary/50 uppercase tracking-widest"
+          class="text-[9px] font-mono text-primary/70 uppercase tracking-widest"
         >
           // SYSTEM MATRIX //
         </div>
@@ -200,9 +201,9 @@
               class="material-symbols-outlined text-primary"
               style="font-size:26px">build</span
             >
-            <h4 class="font-bold uppercase tracking-tight text-sm">
+            <h3 class="font-bold uppercase tracking-tight text-sm">
               {$t.home.pillar_1_title}
-            </h4>
+            </h3>
           </div>
           <p class="text-sm text-on-surface-variant">{$t.home.pillar_1_body}</p>
         </div>
@@ -214,9 +215,9 @@
               class="material-symbols-outlined text-primary"
               style="font-size:26px">groups</span
             >
-            <h4 class="font-bold uppercase tracking-tight text-sm">
+            <h3 class="font-bold uppercase tracking-tight text-sm">
               {$t.home.pillar_2_title}
-            </h4>
+            </h3>
           </div>
           <p class="text-sm text-on-surface-variant">{$t.home.pillar_2_body}</p>
         </div>
@@ -228,9 +229,9 @@
               class="material-symbols-outlined text-primary"
               style="font-size:26px">school</span
             >
-            <h4 class="font-bold uppercase tracking-tight text-sm">
+            <h3 class="font-bold uppercase tracking-tight text-sm">
               {$t.home.pillar_3_title}
-            </h4>
+            </h3>
           </div>
           <p class="text-sm text-on-surface-variant">{$t.home.pillar_3_body}</p>
         </div>
