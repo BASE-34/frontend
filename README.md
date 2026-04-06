@@ -146,3 +146,27 @@ npm i -D @sveltejs/adapter-vercel   # or adapter-netlify / adapter-cloudflare
 // svelte.config.js
 import adapter from '@sveltejs/adapter-vercel';
 ```
+
+---
+
+## Security & Environment
+
+### Cloudflare Turnstile Integration
+
+The project has site-wide protection via Cloudflare Turnstile. You need to obtain keys from the [Cloudflare Dashboard](https://dash.cloudflare.com/?to=/:account/turnstile).
+
+**1. Update `.env` file:**
+Create or edit your `.env` file in the root directory:
+```env
+PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+```
+
+**2. Docker deployment:**
+When running via Docker, you must pass these as environment variables:
+```bash
+docker run -e PUBLIC_TURNSTILE_SITE_KEY=your_key -e TURNSTILE_SECRET_KEY=your_secret -p 3000:3000 base34-site
+```
+
+**3. CI/CD (Optional):**
+If you are using a CI/CD pipeline, ensure these secrets are added to your repository's environment variables.

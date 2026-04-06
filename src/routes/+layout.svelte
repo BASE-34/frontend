@@ -2,21 +2,26 @@
   import '../app.css';
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import Seo from '$lib/components/Seo.svelte';
+  import SecurityGate from '$lib/components/SecurityGate.svelte';
+  import { security } from '$lib/security';
   import { navigating } from '$app/stores';
   import { onNavigate } from '$app/navigation';
-  import { lang } from '$lib/i18n';
+  import { lang } from '$lib/i18n/store';
   import { browser } from '$app/environment';
   import type { LayoutData } from './$types';
 
   let { children, data }: { children: any; data: LayoutData } = $props();
 
-  // On first SSR load, seed lang from server-detected locale
-  // (client localStorage overrides on hydration)
-  import { onMount, untrack } from "svelte";
-  // Seed lang from SSR on mount if no localStorage value
-  if (!browser) {
-    lang.set(untrack(() => data.lang as 'ua' | 'en'));
-  }
+  // Seed store from server data on first load
+  // LocalStorage in store.ts will handle persistence
+  $effect(() => {
+    if (data.lang) {
+      lang.init(data.lang as 'ua' | 'en');
+    }
+    // Check security status on client mount/navigation
+    security.checkStatus();
+  });
 
   // View Transitions API for smooth page navigation (like YouTube)
   onNavigate((navigation) => {
@@ -29,6 +34,16 @@
     });
   });
 </script>
+
+<Seo 
+  title={data.meta?.title} 
+  description={data.meta?.description} 
+  image={data.meta?.image}
+/>
+
+{#if !$security}
+  <SecurityGate />
+{/if}
 
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />

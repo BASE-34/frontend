@@ -19,7 +19,7 @@ RUN npm run build
 # Delete all dependencies and install only production dependencies
 # This keeps the final image smaller
 RUN rm -rf node_modules
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --ignore-scripts
 
 # Production stage
 FROM node:20-alpine AS runner

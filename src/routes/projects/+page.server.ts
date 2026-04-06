@@ -6,9 +6,11 @@ export const load: PageServerLoad = () => {
     projects,
     stats,
     meta: {
-      title: 'Projects & Deployments — B.A.S.E.34',
+      title: 'Our Projects',
       description:
-        'An archive of B.A.S.E.34 engineering projects: robotics, embedded systems, UAV platforms, SCADA integration and more.',
+        'Explore the B.A.S.E.34 engineering portfolio: robotics, embedded systems, UAV platforms, and SCADA integration.',
+      image: 'https://base34.org.ua/og/projects.png',
+      keywords: ['robotics', 'UAV', 'embedded', 'SCADA', 'engineering projects']
     },
   };
 };

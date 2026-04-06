@@ -1,5 +1,6 @@
 <script lang="ts">
   import { t } from '$lib/i18n';
+  import Turnstile from './Turnstile.svelte';
 </script>
 
 <footer class="bg-surface-container-lowest border-t border-outline-variant/10 pt-16 pb-8">
@@ -52,15 +53,17 @@
       <!-- Status block -->
       <div class="md:col-span-2">
         <h4 class="meta-label mb-5">System</h4>
-        <div class="bg-surface-container-low p-4">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            <span class="text-[9px] font-mono text-primary uppercase tracking-widest">ONLINE</span>
-          </div>
-          <div class="text-[9px] font-mono text-on-surface-variant/60 space-y-1">
-            <div>VER: 1.0.2_BETA</div>
-            <div>UPTIME: 99.8%</div>
-            <div>NODE: KNU_PRIMARY</div>
+        <div class="bg-surface-container-low p-4 flex flex-col gap-4">
+          <div class="space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span class="text-[9px] font-mono text-primary uppercase tracking-widest">ONLINE</span>
+            </div>
+            <div class="text-[9px] font-mono text-on-surface-variant/60 space-y-1">
+              <div>VER: 1.0.2_BETA</div>
+              <div>UPTIME: 99.8%</div>
+              <div>NODE: KNU_PRIMARY</div>
+            </div>
           </div>
         </div>
       </div>

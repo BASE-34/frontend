@@ -8,23 +8,47 @@ export type Lang = 'en' | 'ua';
 const translations = { en, ua };
 
 function createLangStore() {
-  const defaultLang: Lang =
-    browser
-      ? ((localStorage.getItem('lang') as Lang) ?? 'ua')
-      : 'ua';
-
-  const { subscribe, set, update } = writable<Lang>(defaultLang);
+  const { subscribe, set, update } = writable<Lang>('ua');
 
   return {
     subscribe,
-    set: (lang: Lang) => {
-      if (browser) localStorage.setItem('lang', lang);
-      set(lang);
+    /**
+     * Initialize the store.
+     * On server: set to serverLang.
+     * On client: prioritize localStorage, fallback to serverLang.
+     */
+    init: (serverLang: Lang) => {
+      if (!browser) {
+        set(serverLang);
+        return;
+      }
+
+      const saved = localStorage.getItem('lang') as Lang | null;
+      if (saved) {
+        set(saved);
+        document.documentElement.lang = saved;
+        return;
+      }
+
+      // No saved choice: use server detected lang
+      set(serverLang);
+      localStorage.setItem('lang', serverLang);
+      document.documentElement.lang = serverLang;
+    },
+    set: (val: Lang) => {
+      if (browser) {
+        localStorage.setItem('lang', val);
+        document.documentElement.lang = val;
+      }
+      set(val);
     },
     toggle: () =>
-      update((l) => {
+      update((l: Lang) => {
         const next: Lang = l === 'ua' ? 'en' : 'ua';
-        if (browser) localStorage.setItem('lang', next);
+        if (browser) {
+          localStorage.setItem('lang', next);
+          document.documentElement.lang = next;
+        }
         return next;
       }),
   };
@@ -32,4 +56,4 @@ function createLangStore() {
 
 export const lang = createLangStore();
 
-export const t = derived(lang, ($lang) => translations[$lang]);
+export const t = derived(lang, ($lang: Lang) => translations[$lang]);

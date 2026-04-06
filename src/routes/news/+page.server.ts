@@ -5,9 +5,11 @@ export const load: PageServerLoad = () => {
   return {
     newsItems,
     meta: {
-      title: 'Field Notes & News — B.A.S.E.34',
+      title: 'News & Updates',
       description:
-        'Technical updates, research notes, workshop reports and events from the B.A.S.E.34 student engineering association.',
+        'Technical research, workshop reports, and engineering updates from the B.A.S.E.34 student association.',
+      image: 'https://base34.org.ua/og/news.png',
+      keywords: ['news', 'updates', 'research', 'engineering', 'workshop']
     },
   };
 };
