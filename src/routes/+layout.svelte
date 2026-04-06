@@ -12,10 +12,10 @@
 
   // On first SSR load, seed lang from server-detected locale
   // (client localStorage overrides on hydration)
-  import { onMount } from "svelte";
+  import { onMount, untrack } from "svelte";
   // Seed lang from SSR on mount if no localStorage value
   if (!browser) {
-    lang.set(data.lang as 'ua' | 'en');
+    lang.set(untrack(() => data.lang as 'ua' | 'en'));
   }
 
   // View Transitions API for smooth page navigation (like YouTube)

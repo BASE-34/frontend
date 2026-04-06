@@ -3,6 +3,7 @@
   import ProjectCard from '$lib/components/ProjectCard.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
   import { reveal, revealLeft } from '$lib/actions/reveal';
+  import { countUp } from '$lib/actions/countUp';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -71,7 +72,7 @@
     ] as stat, i}
       <div use:reveal={{ delay: i * 80 }} class="flex flex-col">
         <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-outline mb-2">{stat.label}</span>
-        <span class="text-4xl font-black tracking-tighter text-primary">{stat.value}+</span>
+        <span class="text-4xl font-black tracking-tighter text-primary" use:countUp={{ target: stat.value, duration: 2500, suffix: "+" }}>0+</span>
       </div>
     {/each}
   </div>

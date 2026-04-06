@@ -2,6 +2,7 @@
   import { t, lang } from '$lib/i18n';
   import PageHeader from '$lib/components/PageHeader.svelte';
   import { reveal, revealLeft } from '$lib/actions/reveal';
+  import { decode } from '$lib/actions/decode';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -42,6 +43,7 @@
   h1line1={$t.contact.h1_1}
   h1line2={$t.contact.h1_2}
   body={$t.contact.body}
+  metaLines={['VERSION_4.0.2_BETA', 'LAST_UPDATE: 2026.03.02', 'Status: Online']}
 />
 
 <div class="container mx-auto px-6 md:px-8 max-w-7xl pb-24">
@@ -163,10 +165,10 @@
             ['STATUS', 'ONLINE'],
             ['RESPONSE_TIME', '24-48h'],
             ['ENCRYPTION', 'TLS_1.3'],
-          ] as [k, v]}
+          ] as [k, v], i}
             <div class="flex justify-between items-center">
               <span class="text-[9px] font-mono text-on-surface-variant/50 uppercase">{k}</span>
-              <span class="text-[9px] font-mono text-primary uppercase">{v}</span>
+              <span class="text-[9px] font-mono text-primary uppercase" use:decode={{ targetText: v, delay: i * 200, duration: 1000 }}>{v}</span>
             </div>
           {/each}
         </div>

@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { typewriter } from '$lib/actions/typewriter';
+  import { decode } from '$lib/actions/decode';
+
   interface Props {
     badge?: string;
     h1line1: string;
@@ -20,10 +23,10 @@
           {badge}
         </div>
       {/if}
-      <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mb-6">
-        {h1line1}
+      <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none uppercase mb-6 min-h-[1.2em]">
+        <span use:typewriter={{ text: h1line1, speed: 40, cursor: false }}></span>
         {#if h1line2}
-          <br /><span class="text-primary">{h1line2}</span>
+          <br /><span class="text-primary" use:typewriter={{ text: h1line2, speed: 40, delay: h1line1.length * 40, cursor: true }}></span>
         {/if}
       </h1>
       {#if body}
@@ -39,8 +42,8 @@
 
     {#if metaLines.length > 0}
       <div class="md:col-span-4 flex flex-col gap-1.5 border-l border-outline-variant/30 pl-6 pb-2">
-        {#each metaLines as line}
-          <span class="text-[10px] font-mono text-on-surface-variant/60">{line}</span>
+        {#each metaLines as line, i}
+          <span class="text-[10px] font-mono text-on-surface-variant/60" use:decode={{ targetText: line, duration: 1500, delay: i * 350 }}>{line}</span>
         {/each}
       </div>
     {/if}

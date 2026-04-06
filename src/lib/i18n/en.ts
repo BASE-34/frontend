@@ -45,7 +45,7 @@ export const en = {
   projects: {
     badge: 'Student Association v6.0',
     h1_1: 'Our Projects',
-    h1_2: '& Deployments_',
+    h1_2: '& Deployments',
     body: 'There will be a description here someday.',
     active_protocols: 'Active Protocols',
     registry: '// Project_Registry',
@@ -145,7 +145,7 @@ export const en = {
   contact: {
     badge: 'Communication Channel',
     h1_1: 'Initiate',
-    h1_2: 'Contact_',
+    h1_2: 'Contact',
     body: 'Reach out to join the association, propose a collaboration, or inquire about our projects and events.',
     form_name: 'FULL_NAME',
     form_email: 'EMAIL_ADDRESS',
