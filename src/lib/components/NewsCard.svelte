@@ -24,18 +24,18 @@
   class="surface-card group flex flex-col h-full"
 >
   {#if item.image}
-    <div class="aspect-video overflow-hidden">
+    <a href="/news/{item.id}" class="aspect-video overflow-hidden block">
       <img
         src={item.image}
         alt={$lang === 'ua' ? item.title_ua : item.title}
         class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
         loading="lazy"
       />
-    </div>
+    </a>
   {:else}
-    <div class="aspect-video bg-surface-container-high flex items-center justify-center">
+    <a href="/news/{item.id}" class="aspect-video bg-surface-container-high flex items-center justify-center block">
       <span class="material-symbols-outlined text-outline-variant text-4xl">article</span>
-    </div>
+    </a>
   {/if}
 
   <div class="p-6 flex flex-col flex-1">
@@ -46,18 +46,20 @@
       </span>
     </div>
 
-    <h4 class="text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors flex-1">
-      {$lang === 'ua' ? item.title_ua : item.title}
-    </h4>
+    <a href="/news/{item.id}" class="block flex-1">
+      <h4 class="text-lg font-bold leading-tight mb-3 group-hover:text-primary transition-colors">
+        {$lang === 'ua' ? item.title_ua : item.title}
+      </h4>
+    </a>
     <p class="text-on-surface-variant text-sm line-clamp-2 mb-6">
       {$lang === 'ua' ? item.excerpt_ua : item.excerpt}
     </p>
 
     <div class="flex items-center justify-between mt-auto">
-      <button class="btn-ghost text-primary">
+      <a href="/news/{item.id}" class="btn-ghost text-primary">
         {$t.news.read_full}
         <span class="material-symbols-outlined text-sm">arrow_forward</span>
-      </button>
+      </a>
       <span class="text-[9px] font-mono text-outline/50">{item.log_id}</span>
     </div>
   </div>

@@ -3,31 +3,20 @@
   import PageHeader from '$lib/components/PageHeader.svelte';
   import { reveal, revealLeft } from '$lib/actions/reveal';
   import { decode } from '$lib/actions/decode';
+  import { enhance } from '$app/forms';
+  import { page } from '$app/state';
   import type { PageData } from './$types';
 
-  let { data }: { data: PageData } = $props();
+  let { data, form }: { data: PageData; form: any } = $props();
 
-  let name = $state('');
-  let email = $state('');
-  let subject = $state('');
-  let message = $state('');
-  let submitted = $state(false);
+  const submitted = $derived(form?.success === true);
+  const errors = $derived(form?.errors ?? {});
+  const values = $derived(form?.values ?? {});
   let loading = $state(false);
 
-  async function handleSubmit(e: Event) {
-    e.preventDefault();
-    loading = true;
-    // API call goes here
-    loading = false;
-    submitted = true;
-  }
-
-  function reset() {
-    submitted = false;
-    name = '';
-    email = '';
-    subject = '';
-    message = '';
+  function resetForm() {
+    // Navigate to same page to clear form state
+    window.location.reload();
   }
 </script>
 
@@ -60,36 +49,68 @@
           <p class="text-on-surface-variant text-sm mb-8">
             {$lang === 'ua' ? 'Ми відповімо протягом 24-48 годин.' : "We'll respond within 24–48 hours."}
           </p>
-          <button onclick={reset} class="btn-outline">
+          <button onclick={resetForm} class="btn-outline">
             {$lang === 'ua' ? 'Надіслати ще' : 'Send Another'}
           </button>
         </div>
       {:else}
-        <form onsubmit={handleSubmit} class="space-y-6">
+        <form
+          method="POST"
+          use:enhance={() => {
+            loading = true;
+            return async ({ update }) => {
+              loading = false;
+              await update();
+            };
+          }}
+          class="space-y-6"
+        >
+          {#if errors.server}
+            <div class="bg-error/10 border-l-4 border-error p-4 text-sm text-error font-bold">
+              {errors.server}
+            </div>
+          {/if}
+
+          {#if errors.turnstile}
+            <div class="bg-error/10 border-l-4 border-error p-4 text-sm text-error font-bold">
+              {errors.turnstile}
+            </div>
+          {/if}
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label class="text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface-variant block mb-2" for="name">
                 {$t.contact.form_name}
               </label>
               <input
-                id="name" bind:value={name} required type="text"
+                id="name" name="name" required type="text"
+                value={values.name ?? ''}
                 class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/50
                        focus:border-primary focus:ring-0 focus:outline-none text-on-surface
-                       placeholder:text-outline/40 py-4 px-4 font-bold transition-colors"
+                       placeholder:text-outline/40 py-4 px-4 font-bold transition-colors
+                       {errors.name ? 'border-error' : ''}"
                 placeholder="Ім'я Прізвище"
               />
+              {#if errors.name}
+                <span class="text-[10px] text-error mt-1 block">{errors.name}</span>
+              {/if}
             </div>
             <div>
               <label class="text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface-variant block mb-2" for="email">
                 {$t.contact.form_email}
               </label>
               <input
-                id="email" bind:value={email} required type="email"
+                id="email" name="email" required type="email"
+                value={values.email ?? ''}
                 class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/50
                        focus:border-primary focus:ring-0 focus:outline-none text-on-surface
-                       placeholder:text-outline/40 py-4 px-4 font-bold transition-colors"
+                       placeholder:text-outline/40 py-4 px-4 font-bold transition-colors
+                       {errors.email ? 'border-error' : ''}"
                 placeholder="you@knu.ua"
               />
+              {#if errors.email}
+                <span class="text-[10px] text-error mt-1 block">{errors.email}</span>
+              {/if}
             </div>
           </div>
 
@@ -98,12 +119,17 @@
               {$t.contact.form_subject}
             </label>
             <input
-              id="subject" bind:value={subject} required type="text"
+              id="subject" name="subject" required type="text"
+              value={values.subject ?? ''}
               class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/50
                      focus:border-primary focus:ring-0 focus:outline-none text-on-surface
-                     placeholder:text-outline/40 py-4 px-4 font-bold transition-colors"
+                     placeholder:text-outline/40 py-4 px-4 font-bold transition-colors
+                     {errors.subject ? 'border-error' : ''}"
               placeholder="Membership / Collaboration / Other"
             />
+            {#if errors.subject}
+              <span class="text-[10px] text-error mt-1 block">{errors.subject}</span>
+            {/if}
           </div>
 
           <div>
@@ -111,12 +137,16 @@
               {$t.contact.form_message}
             </label>
             <textarea
-              id="message" bind:value={message} required rows={6}
+              id="message" name="message" required rows={6}
               class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/50
                      focus:border-primary focus:ring-0 focus:outline-none text-on-surface
-                     placeholder:text-outline/40 py-4 px-4 font-bold transition-colors resize-none"
+                     placeholder:text-outline/40 py-4 px-4 font-bold transition-colors resize-none
+                     {errors.message ? 'border-error' : ''}"
               placeholder={$lang === 'ua' ? 'Опишіть ваш запит...' : 'Describe your inquiry...'}
-            ></textarea>
+            >{values.message ?? ''}</textarea>
+            {#if errors.message}
+              <span class="text-[10px] text-error mt-1 block">{errors.message}</span>
+            {/if}
           </div>
 
           <button type="submit" disabled={loading} class="btn-primary disabled:opacity-60">
@@ -168,7 +198,7 @@
           ] as [k, v], i}
             <div class="flex justify-between items-center">
               <span class="text-[9px] font-mono text-on-surface-variant/50 uppercase">{k}</span>
-              <span class="text-[9px] font-mono text-primary uppercase" use:decode={{ targetText: v, delay: i * 200, duration: 1000 }}>{v}</span>
+              <span class="text-[9px] font-mono text-primary uppercase" use:decode={{ targetText: v, duration: 1000 }}>{v}</span>
             </div>
           {/each}
         </div>

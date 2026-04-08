@@ -75,10 +75,10 @@
         <p class="text-on-surface-variant max-w-lg text-sm leading-relaxed mb-6 hidden md:block">
           {$lang === 'ua' ? featured.excerpt_ua : featured.excerpt}
         </p>
-        <button class="btn-primary">
+        <a href="/news/{featured.id}" class="btn-primary">
           {$t.news.read_full}
           <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </button>
+        </a>
       </div>
     </article>
 
@@ -88,7 +88,7 @@
         <h4 class="text-[10px] font-bold tracking-[0.3em] uppercase text-primary">{$t.news.quick_updates}</h4>
       </div>
       {#each secondary as item}
-        <article class="bg-surface-container-high p-6 flex-1 group cursor-pointer hover:bg-surface-container-highest transition-colors flex flex-col">
+        <a href="/news/{item.id}" class="bg-surface-container-high p-6 flex-1 group cursor-pointer hover:bg-surface-container-highest transition-colors flex flex-col">
           <div class="text-[10px] text-primary/60 font-bold tracking-widest uppercase mb-3">
             {item.category.toUpperCase()}
           </div>
@@ -99,7 +99,7 @@
             <span class="text-[10px] text-on-surface-variant/50 font-mono">ID: {item.log_id}</span>
             <span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">north_east</span>
           </div>
-        </article>
+        </a>
       {/each}
     </div>
   </section>

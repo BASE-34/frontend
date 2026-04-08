@@ -16,13 +16,12 @@
     dev: 'text-tertiary bg-tertiary/10 border-tertiary/20',
     completed: 'text-outline bg-outline/10 border-outline/20',
   };
-
-  $effect(() => {});
 </script>
 
-<div
+<a
+  href="/projects/{project.id}"
   use:reveal={{ delay }}
-  class="surface-card group glow-hover flex flex-col"
+  class="surface-card group glow-hover flex flex-col block"
 >
   <!-- Image / Icon area -->
   <div class="aspect-video bg-surface-container-low overflow-hidden relative">
@@ -76,13 +75,12 @@
       <span class="text-sm font-mono text-primary">{project.metric_value}</span>
     </div>
 
-    <a
-      href={project.docs_url ?? '#'}
-      class="w-full py-3 border border-outline-variant/30 hover:bg-primary hover:text-on-primary
-             hover:border-primary transition-all text-center text-[10px] font-bold uppercase
+    <span
+      class="w-full py-3 border border-outline-variant/30 group-hover:bg-primary group-hover:text-on-primary
+             group-hover:border-primary transition-all text-center text-[10px] font-bold uppercase
              tracking-[0.2em] block"
     >
       {$t.projects.access_docs}
-    </a>
+    </span>
   </div>
-</div>
+</a>

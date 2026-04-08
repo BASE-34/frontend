@@ -46,6 +46,7 @@ pnpm-debug.log*
 
 coverage
 *.lcov
+.vitest/
 
 # =========================
 
@@ -54,6 +55,7 @@ coverage
 # =========================
 
 .cache
+.vite/
 .eslintcache
 .stylelintcache
 

@@ -41,7 +41,7 @@
   image={data.meta?.image}
 />
 
-{#if !$security}
+{#if data.enableTurnstile && !$security}
   <SecurityGate />
 {/if}
 

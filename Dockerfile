@@ -1,8 +1,15 @@
 # Build stage
 FROM node:20-alpine AS builder
 
-# Set working directory
 WORKDIR /app
+
+# Accept build args
+ARG API_BASE_URL=http://mock-api:4000
+ARG PUBLIC_ENABLE_TURNSTILE=true
+
+# Set environment for build
+ENV API_BASE_URL=${API_BASE_URL}
+ENV PUBLIC_ENABLE_TURNSTILE=${PUBLIC_ENABLE_TURNSTILE}
 
 # Copy package files and .npmrc if it exists
 COPY package.json package-lock.json .npmrc* ./
@@ -25,6 +32,10 @@ RUN npm ci --omit=dev --ignore-scripts
 FROM node:20-alpine AS runner
 
 WORKDIR /app
+
+# Runtime env vars (can be overridden at container start)
+ENV API_BASE_URL=http://mock-api:4000
+ENV PUBLIC_ENABLE_TURNSTILE=true
 
 # Copy the built app and production dependencies from builder stage
 COPY --from=builder /app/build build/

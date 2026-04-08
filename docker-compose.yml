@@ -1,0 +1,59 @@
+# Docker Compose for B.A.S.E.34 Frontend
+# Usage:
+#   Mock mode:       docker compose --profile mock up
+#   Production mode: docker compose --profile production up
+
+services:
+  # ── Mock API Server ──────────────────────────────────
+  mock-api:
+    build:
+      context: ./mock-server
+      dockerfile: Dockerfile
+    profiles:
+      - mock
+    ports:
+      - "4000:4000"
+    environment:
+      MOCK_PORT: 4000
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4000/api/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # ── Frontend (Mock mode) ─────────────────────────────
+  frontend-mock:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: http://mock-api:4000
+        PUBLIC_ENABLE_TURNSTILE: "false"
+    profiles:
+      - mock
+    ports:
+      - "3000:3000"
+    environment:
+      API_BASE_URL: http://mock-api:4000
+      PUBLIC_ENABLE_TURNSTILE: "false"
+    depends_on:
+      mock-api:
+        condition: service_healthy
+
+  # ── Frontend (Production mode) ───────────────────────
+  frontend-production:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: ${API_BASE_URL:-http://localhost:4000}
+        PUBLIC_ENABLE_TURNSTILE: ${PUBLIC_ENABLE_TURNSTILE:-true}
+    profiles:
+      - production
+    ports:
+      - "3000:3000"
+    environment:
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:4000}
+      PUBLIC_ENABLE_TURNSTILE: ${PUBLIC_ENABLE_TURNSTILE:-true}
+      PUBLIC_TURNSTILE_SITE_KEY: ${PUBLIC_TURNSTILE_SITE_KEY:-}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
