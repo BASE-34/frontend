@@ -1,0 +1,17 @@
+[
+  {
+    "id": "base34-beta-launch",
+    "title": "B.A.S.E.34 Platform Enters Public Beta",
+    "title_ua": "Платформа B.A.S.E.34 виходить у публічний Beta-режим",
+    "excerpt": "We are proud to announce that the B.A.S.E.34 engineering platform is officially live in beta. Access our ongoing projects and structural logs.",
+    "excerpt_ua": "Ми раді повідомити, що інженерна платформа B.A.S.E.34 офіційно запущена в бета-версії. Отримайте доступ до наших проектів та журналів.",
+    "content": "## Platform Initialization\n\nAfter months of localized development, the Bureau of Advanced Systems & Electronics has officially opened its communication gateway to the public.\n\nThe current platform iteration (v.BETA-0.9) serves as the primary conduit for disseminating information regarding our robotics, embedded systems, and UAV developments.\n\n### What's Currently Active:\n\n- **Project Database**: Tracking our active and completed internal hardware/software developments.\n- **Secure Entry Protocol**: Full integration of Cloudflare validation to sanitize incoming traffic logic.\n- **Bilingual Core**: Full support for both English (Primary) and Ukrainian (Localization) communication.\n\n### Upcoming Features:\n\nThroughout the Beta phase, you may experience minor frontend recalibrations and structural adjustments as we refine our data pipelines. Next integration phases include direct WebSocket feeds for live telemetry outputs from our testing grounds.\n\nStay tuned.\n\n---\n\n*Command Center — B.A.S.E.34*",
+    "content_ua": "## Ініціалізація платформи\n\nПісля локалізованої розробки Бюро Передових Систем і Електроніки офіційно відкрило свій комунікаційний шлюз для публіки.\n\nПоточна ітерація платформи (v.BETA-0.9) слугує основним каналом для поширення інформації щодо наших розробок у сферах робототехніки, вбудованих систем та БПЛА.\n\n### Що зараз активно:\n\n- **База проектів**: Відстеження наших активних і завершених розробок апаратного і програмного забезпечення.\n- **Протокол безпечного входу**: Повна інтеграція валідації Cloudflare для санітизації вхідного трафіку.\n- **Двомовне ядро**: Повна підтримка англійської та української мов для комунікації.\n\n### Заплановані функції:\n\nПротягом фази бета-тестування ви можете помітити незначні візуальні калібрування та структурні зміни, поки ми налаштовуємо наші канали даних. Наступні фази інтеграції включають прямі канали WebSocket для виводу живої телеметрії з наших випробувальних полігонів.\n\nЗалишайтесь на зв'язку.\n\n---\n\n*Командний Центр — B.A.S.E.34*",
+    "category": "system",
+    "date": "2026.04.12",
+    "image": "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?w=1200&q=80&auto=format&fit=crop",
+    "featured": true,
+    "breaking": true,
+    "log_id": "SYS-000"
+  }
+]

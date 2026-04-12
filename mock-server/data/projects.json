@@ -1,0 +1,52 @@
+[
+  {
+    "id": "base34-platform",
+    "title": "B.A.S.E.34 Web Platform",
+    "title_ua": "Веб-платформа B.A.S.E.34",
+    "description": "High-performance SvelteKit SPA serving as the public face and internal portal for the bureau.",
+    "description_ua": "Високопродуктивний SvelteKit SSR, що слугує публічним обличчям та внутрішнім порталом бюро.",
+    "full_description": "## Project Overview\n\nThe B.A.S.E.34 Web Platform is a custom-engineered monolithic interface designed to combine public outreach with secure access to internal telemetry datastreams. Built entirely from the ground up, it embodies our industrial, brutalist aesthetic while maintaining strict performance constraints.\n\n## Technical Architecture\n\n- **Frontend**: SvelteKit functioning as a node-adapted SPA with granular Server-Side Rendering control.\n- **Styling**: TailwindCSS with an extensive custom design system based on Material Design 3 logic, utilizing dynamic surface and primary tokens.\n- **Bot Protection**: Cloudflare Turnstile integration at the root layout level, persisting verification via local state.\n- **Deployment**: Dockerized multi-stage builds ensuring a minimal footprint for production environments.\n\n## Key Deliverables\n\n| Sub-system | Status |\n|------------|--------|\n| UI / UX Design | Stable |\n| i18n Localization | Implemented (EN/UA) |\n| Security Gate | Active |\n\n---\n\n*Software Engineering Division — B.A.S.E.34*",
+    "full_description_ua": "## Огляд проекту\n\nВеб-платформа B.A.S.E.34 — це спеціально розроблений монолітний інтерфейс, створений для поєднання нашої публічної діяльності з безпечним доступом до внутрішніх телеметричних потоків даних. Створений з нуля, він втілює нашу індустріальну естетику, дотримуючись жорстких вимог щодо продуктивності.\n\n## Технічна архітектура\n\n- **Фронтенд**: SvelteKit, що працює як адаптований під Node.js додаток із серверним рендерингом (SSR).\n- **Стилізація**: TailwindCSS з архітектурною дизайн-системою, заснованою на концепціях Material Design 3.\n- **Захист**: Інтеграція Cloudflare Turnstile на рівні макета із кешуванням стану перевірки.\n- **Розгортання**: Багатоетапна збірка в Docker для ізольованого запуску в продакшені.\n\n## Ключові результати\n\n| Підсистема | Статус |\n|------------|--------|\n| Дизайн UI / UX | Стабільний |\n| Локалізація (i18n) | Впроваджено (EN/UA) |\n| Шлюз безпеки | Активний |\n\n---\n\n*Відділ розробки програмного забезпечення — B.A.S.E.34*",
+    "status": "dev",
+    "metric_label": "Lighthouse Score",
+    "metric_label_ua": "Lighthouse Оцінка",
+    "metric_value": "99/100",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80&auto=format&fit=crop",
+    "tags": [
+      "SvelteKit",
+      "TypeScript",
+      "Docker"
+    ],
+    "tags_ua": [
+      "SvelteKit",
+      "TypeScript",
+      "Docker"
+    ],
+    "docs_url": "#"
+  },
+  {
+    "id": "uav-telemetry",
+    "title": "UAV Telemetry Platform",
+    "title_ua": "Телеметрична платформа БПЛА",
+    "description": "Real-time telemetry, autonomous navigation and geofencing for multi-rotor UAVs.",
+    "description_ua": "Телеметрія в реальному часі, автономна навігація та геозонування для мультироторних БПЛА.",
+    "full_description": "## Project Overview\n\nThe UAV Telemetry Platform provides a complete ground control station and onboard telemetry system for B.A.S.E.34's fleet of multi-rotor unmanned aerial vehicles.\n\n## System Components\n\n### Onboard (Flight Controller)\n\n- **Flight Controller**: Custom build based on Pixhawk 6X (STM32H753)\n- **Autopilot firmware**: PX4 v1.15 with custom modules\n- **Companion computer**: Raspberry Pi 5 for high-level processing\n- **Communication**: 868MHz LoRa (long range) + 5.8GHz WiFi (high bandwidth)\n- **Sensors**: RTK-GPS (±2cm), barometer, magnetometer, optical flow\n\n### Ground Control Station\n\n- Custom web-based GCS built with SvelteKit + MapLibre\n- Real-time telemetry display: attitude, position, battery, signal strength\n- Mission planner with drag-and-drop waypoints\n- Geofence editor with no-fly zone alerts\n- Video stream viewer (H.265, 1080p30)\n\n## Capabilities\n\n| Feature | Specification |\n|---------|---------------|\n| Maximum range | 12km (LoRa telemetry) |\n| Flight time | 35 min (6S 6000mAh) |\n| Maximum speed | 72 km/h |\n| Telemetry rate | 10Hz (position), 50Hz (attitude) |\n| Geofence accuracy | ±1m |\n\n## Safety Features\n\n- Automatic return-to-home on signal loss\n- Geofence breach warning + automatic boundary enforcement\n- Battery failsafe with calculated return energy reserve\n- Parachute deployment trigger (BRS)\n\n---\n\n*Aerospace Division — B.A.S.E.34*",
+    "full_description_ua": "## Огляд проекту\n\nТелеметрична платформа БПЛА забезпечує повну наземну станцію управління та бортову систему телеметрії для флоту мультироторних БПЛА B.A.S.E.34.\n\n## Компоненти системи\n\n### Бортові\n\n- **Польотний контролер**: на базі Pixhawk 6X (STM32H753)\n- **Автопілот**: PX4 v1.15 з модулями\n- **Бортовий комп'ютер**: Raspberry Pi 5\n- **Зв'язок**: LoRa 868МГц + WiFi 5.8ГГц\n\n### Наземна станція управління\n\n- Веб-інтерфейс на SvelteKit + MapLibre\n- Телеметрія в реальному часі\n- Планувальник місій\n\n## Характеристики\n\n| Функція | Специфікація |\n|---------|---------------|\n| Дальність | 12 км |\n| Час польоту | 35 хв |\n| Макс. швидкість | 72 км/год |\n\n---\n\n*Аерокосмічний підрозділ — B.A.S.E.34*",
+    "status": "active",
+    "metric_label": "Range",
+    "metric_label_ua": "Дальність",
+    "metric_value": "12km",
+    "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80&auto=format&fit=crop",
+    "tags": [
+      "MAVLink",
+      "ROS2",
+      "C++"
+    ],
+    "tags_ua": [
+      "MAVLink",
+      "ROS2",
+      "C++"
+    ],
+    "docs_url": "#"
+  }
+]
