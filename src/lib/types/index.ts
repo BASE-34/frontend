@@ -38,6 +38,7 @@ export interface Stats {
   hardware: number;
   workshops: number;
   members: number;
+  founded: number;
 }
 
 export interface ContactSubmission {

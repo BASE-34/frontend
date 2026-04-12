@@ -1,7 +1,11 @@
 import type { PageServerLoad } from './$types';
+import { apiFetch } from '$lib/server/api';
+import type { Stats } from '$lib/types';
 
-export const load: PageServerLoad = () => {
+export const load: PageServerLoad = async () => {
+  const stats = await apiFetch<Stats>('/api/stats');
   return {
+    stats,
     meta: {
       title: 'Home',
       description:

@@ -130,3 +130,6 @@ vite.config.ts.timestamp-*
 .temp
 *.local
 
+
+# Mock Server
+mock-server/

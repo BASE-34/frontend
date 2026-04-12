@@ -12,11 +12,11 @@ services:
     profiles:
       - mock
     ports:
-      - "4000:4000"
+      - "127.0.0.1:4400:4400"
     environment:
-      MOCK_PORT: 4000
+      MOCK_PORT: 4400
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:4000/api/health"]
+      test: [ "CMD", "wget", "-qO-", "http://localhost:4400/api/health" ]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -27,14 +27,14 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        API_BASE_URL: http://mock-api:4000
+        API_BASE_URL: http://mock-api:4400
         PUBLIC_ENABLE_TURNSTILE: "false"
     profiles:
       - mock
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
-      API_BASE_URL: http://mock-api:4000
+      API_BASE_URL: http://mock-api:4400
       PUBLIC_ENABLE_TURNSTILE: "false"
     depends_on:
       mock-api:
@@ -46,14 +46,13 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        API_BASE_URL: ${API_BASE_URL:-http://localhost:4000}
+        API_BASE_URL: ${API_BASE_URL:-http://localhost:4400}
         PUBLIC_ENABLE_TURNSTILE: ${PUBLIC_ENABLE_TURNSTILE:-true}
     profiles:
       - production
-    ports:
-      - "3000:3000"
+    network_mode: "host"
     environment:
-      API_BASE_URL: ${API_BASE_URL:-http://localhost:4000}
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:4400}
       PUBLIC_ENABLE_TURNSTILE: ${PUBLIC_ENABLE_TURNSTILE:-true}
       PUBLIC_TURNSTILE_SITE_KEY: ${PUBLIC_TURNSTILE_SITE_KEY:-}
       TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}

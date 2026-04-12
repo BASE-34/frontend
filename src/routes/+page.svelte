@@ -5,6 +5,10 @@
   import { decode } from "$lib/actions/decode";
   import { tilt } from "$lib/actions/tilt";
   import CubeMatrix from "$lib/components/CubeMatrix.svelte";
+  import type { PageData } from './$types';
+
+  let { data }: { data: PageData } = $props();
+  const stats = $derived(data.stats);
 </script>
 
 <svelte:head>
@@ -68,7 +72,7 @@
         <div>
           <div
             class="text-3xl font-black text-primary tracking-tighter"
-            use:countUp={{ target: 300, duration: 2000, suffix: "+" }}
+            use:countUp={{ target: stats.members, duration: 2000, suffix: "+" }}
           >
             0+
           </div>
@@ -81,7 +85,7 @@
         <div>
           <div
             class="text-3xl font-black text-primary tracking-tighter"
-            use:countUp={{ target: 15, duration: 2000, suffix: "+" }}
+            use:countUp={{ target: stats.active, duration: 2000, suffix: "+" }}
           >
             0+
           </div>
@@ -94,7 +98,7 @@
         <div>
           <div
             class="text-3xl font-black text-primary tracking-tighter"
-            use:countUp={{ target: 2026, duration: 2500, delay: 300 }}
+            use:countUp={{ target: stats.founded, duration: 2500, delay: 300 }}
           >
             0
           </div>
