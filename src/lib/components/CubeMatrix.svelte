@@ -17,8 +17,10 @@
 
   let containerRef: HTMLDivElement;
   let containerWidth = $state(192);
-  let mouseTiltX = $state(0);
-  let mouseTiltY = $state(0);
+  let targetTiltX = 0;
+  let targetTiltY = 0;
+  let currentTiltX = $state(0);
+  let currentTiltY = $state(0);
   let autoRotateY = $state(0);
   let autoRotateX = $state(0);
 
@@ -104,8 +106,8 @@
     const rect = containerRef.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    mouseTiltY = (x / rect.width) * 40;
-    mouseTiltX = (y / rect.height) * -40;
+    targetTiltY = (x / rect.width) * 40;
+    targetTiltX = (y / rect.height) * -40;
   }
 
   onMount(() => {
@@ -116,7 +118,10 @@
     }, 3200);
     let last = performance.now();
     const loop = (t: number) => {
-      autoRotateY += (t - last) * 0.015; autoRotateX += (t - last) * 0.01;
+      const dt = t - last;
+      autoRotateY += dt * 0.015; autoRotateX += dt * 0.01;
+      currentTiltX += (targetTiltX - currentTiltX) * 0.08;
+      currentTiltY += (targetTiltY - currentTiltY) * 0.08;
       last = t; requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
@@ -149,7 +154,9 @@
       if (currentMove.axis === 'z' && ((f === 0 && currentMove.slice === 0) || (f === 1 && currentMove.slice === 3) || (f === 4 && 3-r === currentMove.slice) || (f === 5 && r === currentMove.slice) || (f === 2 && 3-c === currentMove.slice) || (f === 3 && c === currentMove.slice))) isIn = true;
     }
 
-    const moveRot = isIn ? `rotate${currentMove.axis.toUpperCase()}(${currentMove.angle}deg)` : '';
+    const currentAxis = currentMove.axis.toUpperCase();
+    const moveAngle = (currentMove.active && isIn) ? currentMove.angle : 0;
+    const moveRot = `rotate${currentAxis}(${moveAngle}deg)`;
     const faceRot = `rotateY(${ry}deg) rotateX(${rx}deg)`;
     const pos = `translate3d(${tx}px, ${ty}px, ${tz}px)`;
 
@@ -165,10 +172,10 @@
   bind:clientWidth={containerWidth}
   class="relative w-full max-w-[200px] aspect-square perspective-1200 cursor-none group mx-auto my-12"
   onmousemove={handleMouseMove}
-  onmouseleave={() => { mouseTiltX = 0; mouseTiltY = 0; }}
+  onmouseleave={() => { targetTiltX = 0; targetTiltY = 0; }}
   role="presentation"
 >
-  <div class="cube-world absolute inset-0 style-3d" style="transform: rotateX({mouseTiltX}deg) rotateY({mouseTiltY}deg);">
+  <div class="cube-world absolute inset-0 style-3d" style="transform: rotateX({currentTiltX}deg) rotateY({currentTiltY}deg);">
     <div class="cube-auto absolute inset-0 style-3d" style="transform: rotateX({autoRotateX}deg) rotateY({autoRotateY}deg);">
       {#each cube as face, f}
         {#each face as row, r}
