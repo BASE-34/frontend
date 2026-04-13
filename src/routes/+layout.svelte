@@ -2,7 +2,6 @@
   import '../app.css';
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import Seo from '$lib/components/Seo.svelte';
   import SecurityGate from '$lib/components/SecurityGate.svelte';
   import { security } from '$lib/security';
   import { navigating } from '$app/stores';
@@ -34,12 +33,6 @@
     });
   });
 </script>
-
-<Seo 
-  title={data.meta?.title} 
-  description={data.meta?.description} 
-  image={data.meta?.image}
-/>
 
 {#if data.enableTurnstile && !$security}
   <SecurityGate />
