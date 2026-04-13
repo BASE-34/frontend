@@ -2,6 +2,7 @@
   import { t, lang } from '$lib/i18n';
   import NewsCard from '$lib/components/NewsCard.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
+  import Seo from '$lib/components/Seo.svelte';
   import { reveal } from '$lib/actions/reveal';
   import type { PageData } from './$types';
 
@@ -30,12 +31,9 @@
   ];
 </script>
 
-<svelte:head>
-  <title>{data.meta.title}</title>
-  <meta name="description" content={data.meta.description} />
-  <meta property="og:title" content={data.meta.title} />
-  <meta property="og:description" content={data.meta.description} />
-</svelte:head>
+<Seo 
+  title={data.meta.title}
+/>
 
 <PageHeader
   badge={$t.news.badge}

@@ -5,19 +5,16 @@
   import { decode } from "$lib/actions/decode";
   import { tilt } from "$lib/actions/tilt";
   import CubeMatrix from "$lib/components/CubeMatrix.svelte";
-  import type { PageData } from './$types';
+  import Seo from "$lib/components/Seo.svelte";
+  import type { PageData } from "./$types";
 
   let { data }: { data: PageData } = $props();
   const stats = $derived(data.stats);
 </script>
 
-<svelte:head>
-  <title>B.A.S.E.34 — Bureau of Advanced Systems & Electronics</title>
-  <meta
-    name="description"
-    content="Student engineering association of Taras Shevchenko National University of Kyiv. Hardware, automation, AI, drones."
-  />
-</svelte:head>
+<Seo 
+  title="B.A.S.E.34 — Bureau of Advanced Systems & Electronics"
+/>
 
 <!-- HERO -->
 <section class="relative min-h-screen flex items-center overflow-hidden">
@@ -164,9 +161,9 @@
         >
           // SYSTEM MATRIX //
         </div>
-        
+
         <CubeMatrix />
-        
+
         <div class="text-[9px] font-mono text-outline">B.A.S.E.34 // KNU</div>
       </div>
     </div>

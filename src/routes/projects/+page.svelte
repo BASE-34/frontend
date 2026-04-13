@@ -2,6 +2,7 @@
   import { t, lang } from '$lib/i18n';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
+  import Seo from '$lib/components/Seo.svelte';
   import { reveal, revealLeft } from '$lib/actions/reveal';
   import { countUp } from '$lib/actions/countUp';
   import type { PageData } from './$types';
@@ -11,12 +12,9 @@
   const stats = $derived(data.stats);
 </script>
 
-<svelte:head>
-  <title>{data.meta.title}</title>
-  <meta name="description" content={data.meta.description} />
-  <meta property="og:title" content={data.meta.title} />
-  <meta property="og:description" content={data.meta.description} />
-</svelte:head>
+<Seo 
+  title={data.meta.title}
+/>
 
 <PageHeader
   badge={$t.projects.badge}

@@ -14,13 +14,19 @@
 
   let {
     title,
-    description,
-    image = '/og/default.png',
+    description: _description,
+    image: _image,
     type = 'website',
     keywords = [],
     canonical,
     jsonLd
   }: Props = $props();
+
+  const defaultDesc = "Student engineering association of Taras Shevchenko National University of Kyiv. Hardware, automation, AI.";
+  const finalDesc = $derived(_description || defaultDesc);
+
+  // Safely fallback image if empty string or null is passed
+  const imageUrl = $derived(_image || '/og/default.png');
 
   // Combine title with site name if provided
   const siteName = 'B.A.S.E.34';
@@ -45,12 +51,12 @@
   const finalJsonLd = $derived(jsonLd ? [organizationJsonLd, jsonLd] : organizationJsonLd);
   
   // Ensure image URL is absolute for OG and Twitter
-  const absoluteImageUrl = $derived(image.startsWith('http') ? image : `https://base34.org.ua${image}`);
+  const absoluteImageUrl = $derived(imageUrl.startsWith('http') ? imageUrl : `https://base34.org.ua${imageUrl}`);
 </script>
 
 <svelte:head>
   <title>{fullTitle}</title>
-  <meta name="description" content={description || $t.home.hero_body} />
+  <meta name="description" content={finalDesc} />
   {#if keywords.length > 0}
     <meta name="keywords" content={keywords.join(', ')} />
   {/if}
@@ -58,7 +64,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
-  <meta property="og:description" content={description || $t.home.hero_body} />
+  <meta property="og:description" content={finalDesc} />
   <meta property="og:url" content={currentUrl} />
   <meta property="og:image" content={absoluteImageUrl} />
   <meta property="og:type" content={type} />
@@ -67,7 +73,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
-  <meta name="twitter:description" content={description || $t.home.hero_body} />
+  <meta name="twitter:description" content={finalDesc} />
   <meta name="twitter:image" content={absoluteImageUrl} />
 
   <!-- Hreflang (for state-based, technically both exist at same URL) -->
