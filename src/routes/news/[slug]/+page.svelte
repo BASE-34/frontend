@@ -1,6 +1,7 @@
 <script lang="ts">
   import { t, lang } from '$lib/i18n';
   import PageHeader from '$lib/components/PageHeader.svelte';
+  import Seo from '$lib/components/Seo.svelte';
   import { reveal, revealLeft } from '$lib/actions/reveal';
   import type { PageData } from './$types';
 
@@ -20,15 +21,12 @@
   const content = $derived($lang === 'ua' ? (article.content_ua ?? article.excerpt_ua) : (article.content ?? article.excerpt));
 </script>
 
-<svelte:head>
-  <title>{title} — B.A.S.E.34</title>
-  <meta name="description" content={excerpt} />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={excerpt} />
-  {#if article.image}
-    <meta property="og:image" content={article.image} />
-  {/if}
-</svelte:head>
+<Seo
+  {title}
+  description={excerpt}
+  image={article.image}
+  type="article"
+/>
 
 <!-- Hero -->
 <section class="relative overflow-hidden" style="min-height: 420px">
