@@ -156,7 +156,7 @@ export const ua: Translations = {
     form_submit: 'Передати повідомлення _',
     info_title: 'Вектори зв\'язку',
     info_location: 'Розташування',
-    info_location_val: 'Київський національний університет імені Тараса Шевченка, Київ, Україна',
+    info_location_val: 'КНУ імені Тараса Шевченка',
     info_email: 'Email',
     info_email_val: 'info@base34.org.ua',
     info_telegram: 'Telegram',

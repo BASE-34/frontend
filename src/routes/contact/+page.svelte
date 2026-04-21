@@ -275,13 +275,8 @@
           style="font-size:32px">map</span
         >
         <div>
-          <div class="text-xs font-bold uppercase tracking-wider mb-1">
+          <div class="text-xs font-bold uppercase tracking-wider">
             {$lang === "ua" ? "Університет Шевченка" : "Shevchenko University"}
-          </div>
-          <div class="text-[10px] text-on-surface-variant">
-            {$lang === "ua"
-              ? "Київ, пр-т Глушкова 4Г"
-              : "Kyiv, Hlushkova avenue 4G"}
           </div>
         </div>
       </div>
