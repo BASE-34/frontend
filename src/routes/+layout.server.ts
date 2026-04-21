@@ -7,7 +7,7 @@ export const load: LayoutServerLoad = ({ request }) => {
   const preferUa = acceptLang.toLowerCase().indexOf('uk') !== -1 || acceptLang.toLowerCase().indexOf('ua') !== -1;
   const lang = preferUa ? 'ua' : 'en';
 
-  const enableTurnstile = env.PUBLIC_ENABLE_TURNSTILE !== 'false';
+  const enableTurnstile = env.PUBLIC_ENABLE_TURNSTILE === 'true';
 
   return { 
     lang,

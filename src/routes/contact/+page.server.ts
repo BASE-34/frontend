@@ -20,7 +20,7 @@ export const load: PageServerLoad = () => {
 export const actions: Actions = {
   default: async ({ request, getClientAddress }) => {
     // ── 1. Rate limiting ──────────────────────────────────────────────────────
-    const ip = getClientAddress();
+    const ip = (() => { try { return getClientAddress(); } catch { return 'unknown'; } })();
     const rl = rateLimit(ip, { limit: 5, windowMs: 60_000 }); // 5 req/min per IP
     if (!rl.ok) {
       return fail(429, {

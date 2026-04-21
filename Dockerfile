@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Accept build args
 ARG API_BASE_URL=http://mock-api:4000
-ARG PUBLIC_ENABLE_TURNSTILE=true
+ARG PUBLIC_ENABLE_TURNSTILE=false
 
 # Set environment for build
 ENV API_BASE_URL=${API_BASE_URL}
@@ -35,7 +35,7 @@ WORKDIR /app
 
 # Runtime env vars (can be overridden at container start)
 ENV API_BASE_URL=http://mock-api:4000
-ENV PUBLIC_ENABLE_TURNSTILE=true
+ENV PUBLIC_ENABLE_TURNSTILE=false
 
 # Copy the built app and production dependencies from builder stage
 COPY --from=builder /app/build build/
