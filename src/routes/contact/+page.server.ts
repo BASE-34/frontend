@@ -46,7 +46,7 @@ export const actions: Actions = {
     }
 
     // Optional Turnstile verification
-    const enableTurnstile = env.PUBLIC_ENABLE_TURNSTILE !== 'false';
+    const enableTurnstile = env.ENABLE_TURNSTILE !== 'false';
     if (enableTurnstile && env.TURNSTILE_SECRET_KEY) {
       try {
         const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
