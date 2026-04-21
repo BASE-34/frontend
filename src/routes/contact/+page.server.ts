@@ -39,8 +39,6 @@ export const actions: Actions = {
       message: formData.get('message')?.toString() ?? '',
     };
 
-    const turnstileToken = formData.get('cf-turnstile-response')?.toString() ?? '';
-
     // ── 3. Zod validation ─────────────────────────────────────────────────────
     const parsed = contactSchema.safeParse(raw);
     if (!parsed.success) {
@@ -52,35 +50,7 @@ export const actions: Actions = {
 
     const { name, email, subject, message } = parsed.data;
 
-    // ── 4. Turnstile verification (optional) ──────────────────────────────────
-    // Enabled only when ENABLE_TURNSTILE=true AND secret key is provided.
-    // Falls back gracefully: if env var is missing/undefined → disabled.
-    const enableTurnstile = env.ENABLE_TURNSTILE === 'true';
-
-    if (enableTurnstile && env.TURNSTILE_SECRET_KEY) {
-      try {
-        const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            secret:   env.TURNSTILE_SECRET_KEY,
-            response: turnstileToken,
-          }),
-        });
-        const result = await verifyRes.json();
-        if (!result.success) {
-          return fail(400, {
-            errors: { turnstile: 'Security verification failed. Please try again.' },
-            values: raw,
-          });
-        }
-      } catch (err) {
-        // Network failure → let the form through, log on server
-        console.error('[CONTACT] Turnstile verification network error:', err);
-      }
-    }
-
-    // ── 5. Forward to API backend ─────────────────────────────────────────────
+    // ── 4. Forward to API backend ─────────────────────────────────────────────
     try {
       await apiFetch('/api/contact', {
         method: 'POST',

@@ -7,6 +7,7 @@
     sitekey?: string;
     action?: string;
     theme?: 'light' | 'dark' | 'auto';
+    appearance?: 'always' | 'execute' | 'interaction-only';
     onVerify?: (token: string) => void;
     onError?: (error: any) => void;
   }
@@ -15,6 +16,7 @@
     sitekey = env.PUBLIC_TURNSTILE_SITE_KEY, 
     action = 'sitewide',
     theme = 'dark',
+    appearance = 'always',
     onVerify,
     onError
   }: Props = $props();
@@ -53,6 +55,7 @@
           sitekey,
           action,
           theme,
+          appearance,
           callback: (token: string) => {
             if (onVerify) onVerify(token);
           },
