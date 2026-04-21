@@ -87,9 +87,9 @@ export const actions: Actions = {
         body: { name, email, subject, message },
       });
     } catch (err) {
-      console.error('[CONTACT] API error:', err);
+      console.error('[CONTACT] Backend API unreachable or returned error:', err);
       return fail(500, {
-        errors: { server: 'Failed to send message. Please try again later.' },
+        errors: { server: 'Failed to send message. The server may be temporarily unavailable — please try again later or contact us via email.' },
         values: raw,
       });
     }

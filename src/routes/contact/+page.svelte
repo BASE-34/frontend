@@ -66,9 +66,9 @@
           method="POST"
           use:enhance={() => {
             loading = true;
-            return async ({ update }) => {
+            return async ({ result, update }) => {
               loading = false;
-              await update();
+              await update({ reset: false });
             };
           }}
           class="space-y-6"
