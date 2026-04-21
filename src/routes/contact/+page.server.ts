@@ -46,6 +46,8 @@ export const actions: Actions = {
     }
 
     // Optional Turnstile verification
+    console.log('[DEBUG] ENABLE_TURNSTILE=', JSON.stringify(env.ENABLE_TURNSTILE));
+    console.log('[DEBUG] TURNSTILE_SECRET_KEY=', env.TURNSTILE_SECRET_KEY ? '***set***' : 'NOT SET');
     const enableTurnstile = env.ENABLE_TURNSTILE !== 'false';
     if (enableTurnstile && env.TURNSTILE_SECRET_KEY) {
       try {
