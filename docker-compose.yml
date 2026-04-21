@@ -36,6 +36,7 @@ services:
     environment:
       API_BASE_URL: http://mock-api:4400
       PUBLIC_ENABLE_TURNSTILE: "false"
+      ENABLE_TURNSTILE: "false"
     depends_on:
       mock-api:
         condition: service_healthy
@@ -54,5 +55,6 @@ services:
     environment:
       API_BASE_URL: ${API_BASE_URL:-http://localhost:4400}
       PUBLIC_ENABLE_TURNSTILE: ${PUBLIC_ENABLE_TURNSTILE:-true}
+      ENABLE_TURNSTILE: ${ENABLE_TURNSTILE:-true}
       PUBLIC_TURNSTILE_SITE_KEY: ${PUBLIC_TURNSTILE_SITE_KEY:-}
       TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
